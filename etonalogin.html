@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>iRedVouch Login & Signup</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif, Times, sans-serif;
+      background: radial-gradient(rgb(221, 164, 164), rgb(223, 223, 173), rgb(185, 230, 185));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container-box {
+      width: 800px;
+      height: 500px;
+      background-color: #fff0f5;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      transition: all 0.6s ease-in-out;
+    }
+
+    .form-container {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      transition: all 0.6s ease-in-out;
+      padding: 40px;
+      background-color: white;
+      z-index: 2;
+    }
+
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: center;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      border-radius: 50px;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 0 0.25rem rgba(255, 182, 193, 0.25);
+      border-color: #87cf87;
+      transform: scale(1.02);
+    }
+    .logo-text {
+  text-align: center;
+}
+
+.logo-text h2 {
+  color: white;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.logo-text .tagline {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}.logo-text:hover .tagline {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+    .btn-emphasis {
+      background-color: pink;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-emphasis:hover {
+      background-color: rgb(185, 16, 177);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .socialmedia-icons {
+  display: flex; /* Arrange icons horizontally */
+  gap: 20px; /* Adds space between icons */
+  justify-content: center; /* Optional: center the group */
+  flex-wrap: wrap; /* Optional: allows wrap on smaller screens */
+}
+
+   .socialmedia-icons .icon-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+   width: 50px;
+  height: 50px;
+  margin: 3px; /* Optional: adds more space around each icon */
+}
+
+.socialmedia-icons .icon-container img {
+  width: 80%;
+  height: 80%;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 50%;
+}
+
+.socialmedia-icons .icon-container:hover img {
+  opacity: 0;
+}
+
+/* Add this: black circle with centered label */
+.socialmedia-icons .icon-container::after {
+ content: attr(data-name);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.socialmedia-icons .icon-container:hover::after {
+  opacity: 1;
+}
+
+    .switch-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .switch-link a {
+      color: #ff0062;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .switch-link a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #ff0062;
+      bottom: -2px;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .switch-link a:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+   .logo-box {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  right: 0;
+  background: linear-gradient(135deg, pink, lightblue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.6s ease-in-out;
+  text-align: center;
+  flex-direction: column;
+}
+
+.logo-text h2 {
+  color: rgb(36, 0, 0);
+  font-size: 2.8rem;
+  margin: 0;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.logo-text h2:hover {
+  transform: scale(1.1);
+}
+
+.logo-text .tagline {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: rgba(77, 44, 44, 0.95);
+  letter-spacing: 0.5px;
+}
+
+    .container-box.active .form-login {
+      transform: translateX(100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .container-box.active .form-signup {
+      transform: translateX(100%);
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .container-box.active .logo-box {
+      transform: translateX(-100%);
+    }
+
+    .form-login {
+      left: 0;
+      z-index: 2;
+    }
+
+    .form-signup {
+      left: 0;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .modal.fade .modal-dialog {
+      transition: transform 0.3s ease-out, opacity 0.3s ease;
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+
+    .modal.show .modal-dialog {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .spinner-border {
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 900px) {
+      .container-box {
+        width: 95%;
+        height: auto;
+        flex-direction: column;
+      }
+
+      .panel {
+        width: 100%;
+        padding: 30px;
+      }
+
+      .flipped .logo-panel,
+      .flipped .form-panel {
+        order: initial;
+        transform: none;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container-box" id="containerBox">
+    <!-- Login Form -->
+    <div class="form-container form-login" id="loginForm">
+      <form id="loginFormElement">
+       <h2>Log In Your Account</h2>
+        <input type="text" class="form-control" id="Username" placeholder="Username" required>
+        <input type="password" class="form-control" id="Password" placeholder="Password" required>
+        <button type="submit" class="btn btn-emphasis">Login</button>
+        <div class="switch-link">
+          <div id="loginAlert" class="alert alert-info mt-4 d-none" role="alert"></div>
+          Don't have an account? <a onclick="toggleForms()">Sign Up</a>
+        </div>
+        <div class="socialmedia-icons d-flex justify-content-center position-relative">
+          <div class="icon-container" data-name="FACEBOOK">
+            <img src="facebook.png" alt="facebook">
+          </div>
+          <div class="icon-container" data-name="GOOGLE">
+            <img src="google-icon.png" alt="GOOGLE">
+          </div>
+          <div class="icon-container" data-name="GITHUB">
+            <img src="github9775.jpg" alt="GITHUB">
+          </div>
+       </div>
+      </form>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div class="form-container form-signup" id="signupForm">
+      <form>
+       <h2>Create an Account</h2>
+        <input type="text" class="form-control" placeholder="Full Name" required>
+        <input type="email" class="form-control" placeholder="Email" required>
+        <input type="password" class="form-control" placeholder="Create Password" required>
+        <button type="submit" class="btn btn-emphasis">Sign Up</button>
+        <div class="switch-link">
+          Already have an account? <a onclick="toggleForms()">Login</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Login Successful</h5>
+          </div>
+          <div class="modal-body text-center">
+            <p id="welcomeMessage">Welcome back! Redirecting to homepage...</p>
+            <div class="spinner-border text-success" role="status"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo-box">
+  <div class="logo-text">
+    <h2>iRedVouch</h2>
+    <p class="tagline">Voucher rewards made easy!</p>
+  </div>
+</div>
+  </div>
+
+  <script>
+    function toggleForms() {
+      document.getElementById('containerBox').classList.toggle('active');
+    }
+
+    // Handle login form submit
+    document.getElementById("loginFormElement").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("Username").value.trim();
+      const password = document.getElementById("Password").value.trim();
+      const alertBox = document.getElementById("loginAlert");
+
+      if (username && password) {
+        alertBox.classList.add("d-none");
+        localStorage.setItem("Username", username);
+
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById("loginModal"));
+        document.getElementById("welcomeMessage").textContent = `Hello, ${username}! Redirecting to homepage...`;
+        modal.show();
+
+        // Redirect after 2 seconds
+        setTimeout(() => {
+          window.location.href = "iredvouch_updated.html";
+        }, 2000);
+      } else {
+        alertBox.innerText = "Please enter both Username and Password!";
+        alertBox.classList.remove("d-none");
+        alertBox.classList.replace("alert-info", "alert-warning");
+      }
+    });
+
+    // Hide alert on typing
+    document.getElementById("Username").addEventListener("input", function () {
+      const alertBox = document.getElementById("loginAlert");
+      if (!alertBox.classList.contains("d-none")) {
+        alertBox.classList.add("d-none");
+      }
+    });
+
+    document.getElementById("Password").addEventListener("input", function () {
+      const alertBox = document.getElementById("loginAlert");
+      if (!alertBox.classList.contains("d-none")) {
+        alertBox.classList.add("d-none");
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
